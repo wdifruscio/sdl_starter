@@ -1,5 +1,5 @@
 
-OBJS = main.cpp Game.cpp
+OBJS = main.cpp
 CC = g++
 COMPILER_FLAGS = -w
 LINKER_FLAGS = -lSDL2
