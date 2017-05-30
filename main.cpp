@@ -76,9 +76,29 @@ int main(int argc, char* args[])
     }
     else
     {
-        loadMedia();
-        SDL_UpdateWindowSurface( gWindow );
-        SDL_Delay( 2000 );
-        close();
+        if(!loadMedia() )
+        {
+            printf("Failed to load media. Exiting.");
+        }
+        else
+        {
+            bool quit = false;
+            SDL_Event e;
+
+            while(!quit)
+            {
+                while( SDL_PollEvent( &e ) != 0)
+                {
+                    if( e.type == SDL_QUIT)
+                    {
+                        quit=true;
+                        close();
+                    }
+                }
+                SDL_UpdateWindowSurface( gWindow );
+            }
+            
+        }
+
     }
 }
