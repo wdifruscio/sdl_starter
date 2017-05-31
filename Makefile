@@ -1,5 +1,5 @@
 
-OBJS = main.cpp
+OBJS = main.cpp Ship.cpp
 CC = g++
 COMPILER_FLAGS = -w
 LINKER_FLAGS = -lSDL2 -lSDL2_image

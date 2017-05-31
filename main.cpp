@@ -1,6 +1,10 @@
 #include<SDL2/SDL.h>
-#include<stdio.h>
 #include<SDL2/SDL_image.h>
+#include<iostream>
+#include<stdio.h>
+#include<string>
+
+#include "Ship.h";
 // #include "Game.h";
 
 bool init();
@@ -21,6 +25,7 @@ int SHIP_HEIGHT = 75;
 int SHIP_WIDTH = 98;
 
 SDL_Rect shipRect;
+
 
 
 bool init()
@@ -96,6 +101,9 @@ int main(int argc, char* args[])
         else
         {
             bool quit = false;
+            string newName = "hi";
+            Ship myShipClass(" Ship One ");
+            cout << myShipClass.getName() << endl;
             SDL_Event e;
 
             while(!quit)
@@ -116,6 +124,7 @@ int main(int argc, char* args[])
                         {
                             case SDLK_UP:
                             shipRect.y -= PLAYER_SPEED;
+                            myShipClass.setName("will");
                             break;
 
                             case SDLK_DOWN:
