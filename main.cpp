@@ -10,10 +10,18 @@ void close();
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+const int PLAYER_SPEED = 2;
+
 // ref to window and screen surface
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Surface* shipAsset = NULL;
+
+int SHIP_HEIGHT = 75;
+int SHIP_WIDTH = 98;
+
+SDL_Rect shipRect;
+
 
 bool init()
 {
@@ -52,12 +60,17 @@ bool loadMedia()
     shipAsset = IMG_Load( "assets/ship.png" );
     if( shipAsset == NULL )
     {
-        printf( "Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL_GetError() );
+        printf( "Unable to load image %s! SDL Error: %s\n", "assets/ship.png", SDL_GetError() );
         success = false;
     }
     else
     {
-        SDL_BlitSurface( shipAsset, NULL, gScreenSurface, NULL );
+        SDL_Rect shipRect;
+        shipRect.x = 0;
+        shipRect.y = 0;
+        shipRect.h = SHIP_HEIGHT;
+        shipRect.w = SHIP_WIDTH;
+        SDL_BlitSurface( shipAsset, NULL,  gScreenSurface, &shipRect );
     }
     return success;
 }
@@ -89,10 +102,39 @@ int main(int argc, char* args[])
             {
                 while( SDL_PollEvent( &e ) != 0)
                 {
-                    if( e.type == SDL_QUIT)
+                    if( e.type == SDL_QUIT || e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE )
                     {
                         quit=true;
                         close();
+                    }
+                    if( e.type == SDL_KEYDOWN )
+                    {
+                        //clear screen
+                        SDL_FillRect( gScreenSurface, NULL, SDL_MapRGB( gScreenSurface->format, 80, 80, 80 ) );
+
+                        switch( e.key.keysym.sym )
+                        {
+                            case SDLK_UP:
+                            shipRect.y -= PLAYER_SPEED;
+                            break;
+
+                            case SDLK_DOWN:
+                            shipRect.y += PLAYER_SPEED;
+
+                            break;
+
+                            case SDLK_LEFT:
+                            shipRect.x -= PLAYER_SPEED;
+                            break;
+
+                            case SDLK_RIGHT:
+                            shipRect.x += PLAYER_SPEED;
+                            break;
+
+                            default:
+                            break;
+                        }
+                        SDL_BlitSurface( shipAsset, NULL, gScreenSurface, &shipRect );
                     }
                 }
                 SDL_UpdateWindowSurface( gWindow );
