@@ -125,6 +125,7 @@ int main(int argc, char* args[])
                             case SDLK_UP:
                             shipRect.y -= PLAYER_SPEED;
                             myShipClass.setName("will");
+                            cout << myShipClass.getName() << endl;
                             break;
 
                             case SDLK_DOWN:
