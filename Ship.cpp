@@ -1,4 +1,4 @@
-#include "Ship.h";
+#include "Ship.h"
 #include<iostream>
 #include<stdio.h>
 
@@ -8,7 +8,7 @@ Ship::Ship( string str ){
     shipName = str;
 };
 
-string Ship::setName( string str)
+void Ship::setName( string str)
 {
     shipName = str;
 }

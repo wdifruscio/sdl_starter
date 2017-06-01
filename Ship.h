@@ -3,7 +3,6 @@
 
 #include <string>
 
-
 using namespace std;
 
 class Ship
@@ -13,7 +12,7 @@ class Ship
         //Initializes variables
         Ship( string str );
         
-        string setName( string str );
+        void setName( string str );
         string getName();
 
     private:

@@ -4,8 +4,7 @@
 #include<stdio.h>
 #include<string>
 
-#include "Ship.h";
-// #include "Game.h";
+#include "Ship.h"
 
 bool init();
 bool loadMedia();
@@ -14,7 +13,7 @@ void close();
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-const int PLAYER_SPEED = 2;
+double PLAYER_SPEED = 2.0f;
 
 // ref to window and screen surface
 SDL_Window* gWindow = NULL;
@@ -110,7 +109,7 @@ int main(int argc, char* args[])
             {
                 while( SDL_PollEvent( &e ) != 0)
                 {
-                    if( e.type == SDL_QUIT || e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE )
+                    if( (e.type == SDL_QUIT || e.type == SDL_KEYDOWN) && (e.key.keysym.sym == SDLK_ESCAPE) )
                     {
                         quit=true;
                         close();
